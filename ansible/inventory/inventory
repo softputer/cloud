@@ -1,0 +1,16 @@
+etcd-01 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+node-01  ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
+node-02  ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
+
+
+[all:children]
+master
+node
+
+[master]
+etcd-01
+
+
+[node]
+node-01
+node-02

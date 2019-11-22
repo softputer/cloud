@@ -1,0 +1,28 @@
+---
+- name: create docker user
+  shell: useradd -m docker
+  ignore_errors: yes
+
+- name: copy centos repo
+  copy: src={{ item.src }} dest={{ item.dest }} mode=700
+  with_items:
+    - { src: '../files/CentOS-Base.repo', dest: '/etc/yum.repos.d/CentOS-Base.repo'}
+
+- name: install dependencies
+  yum:
+    update_cache: true
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - epel-release
+    - conntrack
+    - ntpdate
+    - ntp
+    - ipvsadm
+    - ipset
+    - iptables
+    - curl
+    - sysstat
+    - libseccomp
+    - wget
