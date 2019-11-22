@@ -1,0 +1,13 @@
+---
+- name: make sure dir exists
+  file: path={{ item.path }}  state=directory recurse=true
+  with_items:
+    - { path: '/etc/kubernetes/cert' }
+
+- name: copy file to certain dir
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: '../files/ca.pem', dest: '/etc/kubernetes/cert'}
+    - { src: '../files/ca-config.json', dest: '/etc/kubernetes/cert'}
+    - { src: '../files/ca-key.pem', dest: '/etc/kubernetes/cert'}
+

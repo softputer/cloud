@@ -4,3 +4,4 @@
   become_user: root
   roles:
     - {role: 01-preparesys}
+    - {role: 02-ca}
